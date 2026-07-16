@@ -8,8 +8,8 @@
 			<classes>
 		    	<class name="com.testing.qa.PlanitTestAutomation.RegressionTest">
 					<methods>
-<!--				<include name="TestCase1"></include>-->
-<!--				<include name="TestCase2"></include>  -->
+				<include name="TestCase1"></include>
+				<include name="TestCase2"></include>  
 				<include name="TestCase3"></include>  
 <!-- Done -->
 <!--Login-->

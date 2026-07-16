@@ -82,9 +82,9 @@ public class HomePage extends DriverBase {
 		public boolean ClickStartShopping() {
 		    try {
 		        WebElement startShopping = driver.findElement(By.xpath(HomePageLoc.HomePageStartShoppingButton));
-		        System.out.println("Button found");
+		        //System.out.println("Button found");
 		        startShopping.click();
-		        System.out.println("Button clicked");
+		        //System.out.println("Button clicked");
 		        return true;
 		    } catch (Exception e) {
 		        e.printStackTrace();

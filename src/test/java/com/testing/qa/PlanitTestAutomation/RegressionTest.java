@@ -61,85 +61,110 @@ public class RegressionTest extends Listener {
 		flag = cf.ContactPage();
 		if (flag) {
 			System.out.println("Found the contact page link");
+			ls.reportLogPass("Found the contact page link");
 //Click submit button
 			flag = cp.Submit();
 			if(flag) {
+				ls.reportLogPass("Successfully submited");
+				System.out.println("Successfully submited");
 //Verify error messages
 				flag = cp.ForenameMandotryFields();
 				if(flag) {
 				    System.out.println("Forename error message is displayed");
+					ls.reportLogPass("Forename error message is displayed");
 					}
 					assertEquals(flag, true);
 
 					flag = cp.EmailMandotryFields();
 					if(flag) {
 					    System.out.println("Email error message is displayed");
+						ls.reportLogPass("Email error message is displayed");
 					}
 					assertEquals(flag, true);
 	
 					flag = cp.MessageMandotryFields();
 					if(flag) {
 					    System.out.println("Message error message is displayed");
+						ls.reportLogPass("Message error message is displayed");
 					}
 					assertEquals(flag, true);
 //Populate mandatory fields
 					flag = cp.PopulateMandotryFields();
 					assertEquals(flag,true);
 						System.out.println("Values Popluated");
+						ls.reportLogPass("Values Popluated");
 //Validate errors are gone
 							flag = cp.ForenameMandotryFields();
 							assertEquals(flag, false);
 						    System.out.println("Forename error message is not displayed");
+							ls.reportLogPass("Forename error message is not displayed");
 							
 							flag = cp.EmailMandotryFields();
 							assertEquals(flag, false);
 							System.out.println("Email error message is not displayed");
+							ls.reportLogPass("Email error message is not displayed");
 							
 							flag = cp.MessageMandotryFields();
 							assertEquals(flag, false);	
 							System.out.println("Message error message is not displayed");
+							ls.reportLogPass("Message error message is not displayed");
 //Navigate to Home page
 						flag = cf.NavigateHomePage();	
 			}else {
 				System.out.println("Failed to click the submit button");
+				ls.reportLogFail("Failed to click the submit button");
 			}
 		}else {
 			System.out.println("Failed to find the contact page link");
+			ls.reportLogFail("Failed to find the contact page link");
 		}
-		//assertEquals(flag,true);
 	}
 	
-	@Test (priority = 2, invocationCount = 5)
+	@Test (priority = 2) //invocationCount = 5
 	public void TestCase2()  throws FileNotFoundException, IOException, Exception {
+		for (int i = 1; i <= 5; i++) {
+	   System.out.println("******** Execution " + i + " ********");
+	   ls.reportLog("******** Execution " + i + " ********");
 		System.out.println("Finding contact page link");
 		//From the home page go to contact page
 				flag = cf.ContactPage();
 				if(flag) {
 					System.out.println("Finding contact page link");
+					ls.reportLogPass("Finding contact page link");
 		//Populate mandatory fields
 					flag = cp.PopulateMandotryFields();
 					if(flag) {
 						System.out.println("Values Popluated");
+						ls.reportLogPass("Values Popluated");
 		//Click submit button
 						flag = cp.Submit();
 						if(flag) {
 							System.out.println("Submit button clicked");
+							ls.reportLogPass("Submit button clicked");
 		//Validate successful submission message
 							flag =cp.ThanksPage();
 							if(flag) {
 								flag = cf.NavigateHomePage();	
 								System.out.println("Thanks Page appeared");
+								ls.reportLogPass("Thanks Page appeared");
 							}else {
 								System.out.println("Thanks didnt appear");
+								ls.reportLogFail("Thanks didnt appear");
 							}							
 						}else {
 							System.out.println("Submit button didnt clicked");
+							ls.reportLogFail("Submit button didnt clicked");
 						}
 					}else {
 						System.out.println("Values didnt Popluated");
+						ls.reportLogFail("Values didnt Popluated");
 					}
 				}else {
 					System.out.println("Failed to click the submit button");
+					ls.reportLogFail("Failed to click the submit button");
+				}
+				System.out.println("Execution " + i + " Passed");
+				ls.reportLog("Execution " + i + " Passed");
 			}
 	}
 	
@@ -149,31 +174,41 @@ public class RegressionTest extends Listener {
 		//Go to the cart page
 				flag = hp.ClickStartShopping();
 				Assert.assertTrue(flag, "Unable to click Start Shopping button");
+				ls.reportLogPass("Start shop button clicked");
 				if(flag) {
-					System.out.println("Finding shop button");
+					System.out.println("Finding buy button");
+					ls.reportLogPass("Finding buy button");
 					flag = cp1.buy();
 					if(flag) {
 						System.out.println("Purchased the products");
+						ls.reportLogPass("Purchased the products");
 		//Verify the subtotal for each product is correct				
 						flag = cf.goToCart();
 						if(flag) {
 							System.out.println("Navigate to Cart page");
+							ls.reportLogPass("Navigate to Cart page");
 		//Verify the price for each product
 		//Verify that total = sum(sub totals)
 							flag =cp1.ExpectedTotal();
 							if(flag) {
 								System.out.println("Successfully verified the total products");
+								ls.reportLogPass("Successfully verified the total products");
 							}else {
 								System.out.println("Thanks didnt appear");
+								ls.reportLogFail("Thanks didnt appear");
 							}							
 						}else {
 							System.out.println("Submit button didnt clicked");
+							ls.reportLogFail("Submit button didnt clicked");
 						}
 					}else {
 						System.out.println("Values didnt Popluated");
+						ls.reportLogFail("Values didnt Popluated");
 					}
 				}else {
 					System.out.println("Failed to click the shopping button");
+					ls.reportLogFail("Failed to click the shopping button");
+
 			}
 	}
 	
@@ -185,29 +220,10 @@ public class RegressionTest extends Listener {
 	@AfterSuite
 	public void MailSendReport() throws Exception {
 		DB.executionTimeEnd();
-		//Mail.execute("Regression Test");
+		Mail.execute("Regression Test");
 	}
 	
 }
-
-//Not Used
-
-
-//Need to Work
-//Home page carosuel
-//need to work on add watch ist and remove watchlist - 2
-//need to work on single profile and multiple profile - done
-//need to wprk on extent report
-//need to wprk on continue watching rail
-//need to work on search right side arrow click dynamically
-//need to work on title match - done
-//need to work on home page rails
-//Need to work on random slot issue - done
-//need to work on tv guide right side arrow click issue
-//Parental pin 10 mins functionality
-//need to verify someone is watching - concurrency
-//Parallel run
-
 
 //Commands
 //Kill chrome driver for windows

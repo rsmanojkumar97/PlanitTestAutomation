@@ -72,7 +72,7 @@ public class ContactPage extends DriverBase {
 		public boolean ForenameMandotryFields() throws FileNotFoundException, IOException, InterruptedException  {
 //		    String ForenameerrorText = driver.findElement(By.id(ContactPageLoc.ForenamefieldErr1)) .getText() .trim();
 //		    return !ForenameerrorText.isEmpty();
-			System.out.println(driver.findElements(By.xpath(ContactPageLoc.ForenamefieldErr)).size() > 0);
+			//System.out.println(driver.findElements(By.xpath(ContactPageLoc.ForenamefieldErr)).size() > 0);
 			return driver.findElements(By.xpath(ContactPageLoc.ForenamefieldErr)).size() > 0;
 		}
 		
@@ -111,7 +111,7 @@ public class ContactPage extends DriverBase {
 			if(flag) {
 			DB.clickAnElement(ContactPageLoc.Submit, ElementType.Xpath, "Submit button clicked");
 			Thread.sleep(5000);
-			System.out.println("Submit button is clicked" + flag );
+			//System.out.println("Submit button is clicked" + flag );
 			}
 			return flag;
 	}

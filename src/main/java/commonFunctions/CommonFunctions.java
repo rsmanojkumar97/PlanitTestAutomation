@@ -47,7 +47,6 @@ public class CommonFunctions extends DriverBase {
 					System.out.println("ContactLink Appeared");
 					DB.clickAnElement(MenuLinksLoc.ContactLink, ElementType.Xpath, "ClickedContactLink");
 				//Report Extent Report	
-					ls.reportLog("Successfully Navigated to Contact Page");
 					System.out.println("Successfully Navigated to Contact Page");
 				//Wait Until the Email field appears
 					flag = DB.waitForElement(ContactPageLoc.Emailfield, ElementType.Xpath);
@@ -69,15 +68,9 @@ public class CommonFunctions extends DriverBase {
 				System.out.println("Home Page Link Appeared");
 				DB.clickAnElement(MenuLinksLoc.HomePageLink, ElementType.Xpath, "Clicked Home Page Link");
 			//Report Extent Report	
-				ls.reportLog("Successfully Navigated to Home Page");
 				System.out.println("Successfully Navigated to Home Page");
 			//Wait Until the Shopping button field appears
 				flag = hp.HomePageStartShop();
-				if(flag) {
-					System.out.println("Shopping Link button appeared");
-				}else {
-					System.out.println("Shopping Link button didnt appeared");
-				}
 			}else {
 				System.out.println("Home page link not appeared");
 			}
@@ -91,12 +84,11 @@ public class CommonFunctions extends DriverBase {
 				System.out.println("Shop Page Link Appeared");
 				DB.clickAnElement(MenuLinksLoc.ShopPageLink, ElementType.Xpath, "Clicked Home Page Link");
 			//Report Extent Report	
-				ls.reportLog("Successfully Navigated to Shop Page");
 				System.out.println("Successfully Navigated to Shop Page");
 			//Wait Until the Shopping button field appears
 				flag = hp.HomePageStartShop();
 				if(flag) {
-					System.out.println("Shopping Link button appeared");
+					System.out.println("Home page shopping Link button appeared");
 				}else {
 					System.out.println("Shopping Link button didnt appeared");
 				}

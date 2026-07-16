@@ -31,12 +31,12 @@ public class Mailer {
 	public static void execute(String Name) throws Exception {
 		platform = System.getProperty("platformName");
 		SuiteName = Name;
-		String[] to = { "manojkumar.rs@sky.co.nz"}; 
+		String[] to = { "reshmanoj1997@gmail.com"}; 
 //		String[] to = { "" };
 		String[] cc = {};
 		String[] bcc = {};
-		Mailer.sendMail("manojkumar.rs@sky.co.nz", "YogiManoj@2125" ,"172.24.1.59", "25", "true", "true", false,
-				"javax.net.ssl.SSLSocketFactory", "false", to, cc, bcc, "SkyGo Automation Report",
+		Mailer.sendMail("reshmanoj1997@gmail.com", "YogiManoj@2125" ,"172.24.1.59", "25", "true", "true", false,
+				"javax.net.ssl.SSLSocketFactory", "false", to, cc, bcc, "Planit Automation Report",
 				"Attached html file and xls file contains the test result status", path);
 	}
 //email-smtp.ap-southeast-2.amazonaws.com

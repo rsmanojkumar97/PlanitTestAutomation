@@ -101,7 +101,7 @@
 			<configuration>
 				<suiteXmlFiles>
 				<!--	<suiteXmlFile>${suiteXmlFiles}</suiteXmlFile> -->
-					<suiteXmlFile>C:\Users\reshm\eclipse-workspace\PlanitTestAutomation\testng.xml</suiteXmlFile>
+					<suiteXmlFile>C:\Users\reshm\git\PlanitTestAutomation\testng.xml</suiteXmlFile>
 				</suiteXmlFiles>
 			</configuration>
 		</plugin>
