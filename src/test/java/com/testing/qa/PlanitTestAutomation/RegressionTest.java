@@ -177,11 +177,11 @@ public class RegressionTest extends Listener {
 			}
 	}
 	
-//	@AfterClass
-//	 public void tearDown() {
-//        DB.quitBrowser();
-//    }
-//	
+	@AfterClass
+	 public void tearDown() {
+        DB.quitBrowser();
+    }
+	
 	@AfterSuite
 	public void MailSendReport() throws Exception {
 		DB.executionTimeEnd();
