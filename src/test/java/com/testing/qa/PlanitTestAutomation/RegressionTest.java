@@ -54,7 +54,12 @@ public class RegressionTest extends Listener {
 	}
 	
 	
-	@Test (priority =1)
+	@Test (description = "Test case 1:\r\n"
+			+ "From the home page go to contact page\r\n"
+			+ "Click submit button\r\n"
+			+ "Verify error messages\r\n"
+			+ "Populate mandatory fields\r\n"
+			+ "Validate errors are gone",priority =1)
 	public void TestCase1() throws FileNotFoundException, IOException, Exception {
 		System.out.println("Finding contact page link");
 //From the home page go to contact page

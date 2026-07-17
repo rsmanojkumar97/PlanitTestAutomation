@@ -35,12 +35,13 @@ public class Mailer {
 //		String[] to = { "" };
 		String[] cc = {};
 		String[] bcc = {};
-		Mailer.sendMail("reshmanoj1997@gmail.com", "YogiManoj@2125" ,"172.24.1.59", "25", "true", "true", false,
+		
+		Mailer.sendMail("reshmanoj1997@gmail.com", "awuv rrdp bzea thji", "smtp.gmail.com", "465", "true", "true", false,
 				"javax.net.ssl.SSLSocketFactory", "false", to, cc, bcc, "Planit Automation Report",
 				"Attached html file and xls file contains the test result status", path);
 	}
-//email-smtp.ap-southeast-2.amazonaws.com
-//BPtbC3sPx+aNDe3yXFPgu5J+I1fOOhSOuu/QRIhoe1yD
+	
+	
 
 	/**
 	 * Method to send the mail
@@ -61,12 +62,6 @@ public class Mailer {
 			props.put("mail.smtp.starttls.enable", starttls);
 			props.put("mail.smtp.auth", auth);
 		}
-		Authenticator authenticator = new Authenticator() {
-		    protected PasswordAuthentication getPasswordAuthentication() {
-		        return new PasswordAuthentication("AKIA6PFKUYERCCY66C5Q", "BPtbC3sPx+aNDe3yXFPgu5J+I1fOOhSOuu/QRIhoe1yD");
-		    }
-		};
-		//Session session = Session.getInstance(props, authenticator);
 		if (debug) {
 			props.put("mail.smtp.debug", "true");
 		} else {
@@ -88,7 +83,7 @@ public class Mailer {
 			msg.setFrom(new InternetAddress(userName));
 			try {
 				if ((report.equals("Jenkins")) || (report != null)) {
-					msg.setSubject("SkyGo " + SuiteName + " Report");
+					msg.setSubject("Planit " + SuiteName + " Report");
 				}
 			} catch (Exception e) {
 				msg.setSubject(subject);
@@ -127,7 +122,7 @@ public class Mailer {
 					+ "<td><b>Total</b></td>" + "<td>" + Listener.Testcase_passed + "</td>" + "<td>"
 					+ Listener.Testcase_failed + "</td>" + "<td>" + Listener.Testcase_skipped + "</td>" + "<td></td>"
 					+ "<td></td>" + "<td>" + DriverBase.executiontime + "</td>" + "</tr>" + "</table>"
-					+ "</body><p> </p> <p> </p> <p> </p> <p>Regards,  </p><p>SkyGo QA</p>";
+					+ "</body><p> </p> <p> </p> <p> </p> <p>Regards,  </p><p>Manoj Kumar</p>";
 			htmlBodyPart.setContent(htmlMessageAsString, "text/html");
 			multipart.addBodyPart(htmlBodyPart);
 
