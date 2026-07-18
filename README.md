@@ -28,7 +28,7 @@ testng.xml
 
 ## Prerequisites
 
-- Java 21
+- Java 17
 - Maven
 - Google Chrome
 
