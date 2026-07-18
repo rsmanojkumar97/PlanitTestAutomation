@@ -1,5 +1,6 @@
 package utils;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.module.ModuleDescriptor.Exports;
@@ -20,6 +21,8 @@ public class ExtentManager {
 	private static String windowsPath = System.getProperty("user.dir") + "\\test-output\\ExtentReport";
 	private static String macReportFileLoc = macPath + "/" + reportFileName;
 	private static String winReportFileLoc = windowsPath + "\\" + reportFileName;
+	public static String propertyFilePath = System.getProperty("user.dir") + File.separator + "config.properties";
+	public static Properties prop = new Properties();
 	// Declare the build number globally get from the maven run
 
 	public static ExtentReports getInstance() {
@@ -42,6 +45,8 @@ public class ExtentManager {
 	 * @throws IOException
 	 */
 	public static ExtentReports createInstance() throws IOException {
+		prop.load(new FileInputStream(propertyFilePath));
+		String Report_Name = prop.getProperty("Report_Name");
 		FileReader reader = new FileReader("config.properties");
 		Properties prop = new Properties();
 		prop.load(reader);
@@ -50,12 +55,12 @@ public class ExtentManager {
 		platform = getCurrentPlatform();
 		fileName = getReportFileLocation(platform);
 		htmlReporter = new ExtentSparkReporter(fileName);
-		htmlReporter.config().setReportName("Planit Automation Report");
+		htmlReporter.config().setReportName(Report_Name);
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
 		extent.setSystemInfo("Build", "1.1");
 		 
-			extent.setSystemInfo("Environment", " QA ");
+			extent.setSystemInfo("Environment", " Test ");
 		if ((platformName.contains("chrome")) || (platformName.contains("CHROME"))) {
 			extent.setSystemInfo("Platform Name", " Chrome ");
 		} else if ((platformName.contains("Firefox")) || (platformName.contains("FIREFOX"))) {
@@ -70,7 +75,7 @@ public class ExtentManager {
 			extent.setSystemInfo("Platform Name", " Pcloudy Device ");
 		}
 		extent.setSystemInfo("User Name", "Manoj Kumar R S");
-		htmlReporter.config().setDocumentTitle("Planit Extent Report");
+		htmlReporter.config().setDocumentTitle(Report_Name);
 		htmlReporter.config().setTheme(Theme.STANDARD);
 		return extent; 
 	}

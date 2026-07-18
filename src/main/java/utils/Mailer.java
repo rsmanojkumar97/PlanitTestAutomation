@@ -1,5 +1,6 @@
 package utils;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -21,7 +22,8 @@ public class Mailer {
 	public static String report = System.getProperty("Jenkins");
 	static String[] path = { System.getProperty("user.dir") + File.separator + "test-output" + File.separator
 			+ "ExtentReport" + File.separator + "ExtentReport.html" };
-
+	public static String propertyFilePath = System.getProperty("user.dir") + File.separator + "config.properties";
+	public static Properties prop = new Properties();
 	/**
 	 * Method to parse the mail content
 	 * 
@@ -29,24 +31,23 @@ public class Mailer {
 	 * @throws Exception
 	 */
 	public static void execute(String Name) throws Exception {
+		prop.load(new FileInputStream(propertyFilePath));
 		platform = System.getProperty("platformName");
 		SuiteName = Name;
-		String[] to = { "reshmanoj1997@gmail.com"}; 
+		//String[] to = { "reshmanoj1997@gmail.com"}; 
+		String [] to = {prop.getProperty("Email")};
 //		String[] to = { "" };
 		String[] cc = {};
 		String[] bcc = {};
+		String Report_Name = prop.getProperty("Report_Name");
 		
 		Mailer.sendMail("reshmanoj1997@gmail.com", "awuv rrdp bzea thji", "smtp.gmail.com", "465", "true", "true", false,
-				"javax.net.ssl.SSLSocketFactory", "false", to, cc, bcc, "Planit Automation Report",
+				"javax.net.ssl.SSLSocketFactory", "false", to, cc, bcc, Report_Name,
 				"Attached html file and xls file contains the test result status", path);
 	}
-	
-	
-
 	/**
 	 * Method to send the mail
-	 * 
-	
+	 * 	
 	 * @throws Exception
 	 */
 	public static boolean sendMail(String userName, String passWord, String host, String port, String starttls, String auth, boolean debug, String socketFactoryClass, String fallback, String[] to, String[] cc,
@@ -93,13 +94,11 @@ public class Mailer {
 				for (String filePath : attachmentPath) {
 					{
 						MimeBodyPart attachPart = new MimeBodyPart();
-
 						try {
 							attachPart.attachFile(filePath);
 						} catch (IOException ex) {
 							ex.printStackTrace();
 						}
-
 						multipart.addBodyPart(attachPart);
 					}
 				}
@@ -125,28 +124,22 @@ public class Mailer {
 					+ "</body><p> </p> <p> </p> <p> </p> <p>Regards,  </p><p>Manoj Kumar</p>";
 			htmlBodyPart.setContent(htmlMessageAsString, "text/html");
 			multipart.addBodyPart(htmlBodyPart);
-
 			msg.setContent(multipart);
-
 			for (int i = 0; i < to.length; i++) {
 				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to[i]));
 			}
-
 			for (int i = 0; i < cc.length; i++) {
 				msg.addRecipient(Message.RecipientType.CC, new InternetAddress(cc[i]));
 			}
-
 			for (int i = 0; i < bcc.length; i++) {
 				msg.addRecipient(Message.RecipientType.BCC, new InternetAddress(bcc[i]));
 			}
-
 			msg.saveChanges();
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, userName, passWord);
 			transport.sendMessage(msg, msg.getAllRecipients());
 			transport.close();
 			return true;
-
 		} catch (Exception mex) {
 			mex.printStackTrace();
 			return false;
